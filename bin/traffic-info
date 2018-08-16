@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+import traffic_info
+
+if __name__ == "__main__":
+    traffic_info.run()

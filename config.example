@@ -1,0 +1,6 @@
+latitude = 43.6037834
+longitude = 1.4402123
+email_from = traffic-info@example.com
+email_to = user@example.com
+api_key = YOUR_GOOGLE_MAPS_API_KEY
+webdriver_path = /path/to/webdriver
