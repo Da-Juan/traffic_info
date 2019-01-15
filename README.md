@@ -4,7 +4,7 @@ Tired of being "suprised" by traffic when you leave your workplace?
 
 This little tool sends you an email containing a map of the area of your choice with traffic informations.
 
-![Traffic info screenshot](https://github.com/Da-Juan/traffic_info/blob/chrome-headless/docs/_static/images/email_screenshot.png)
+![Traffic info screenshot](https://github.com/Da-Juan/traffic_info/blob/master/docs/_static/images/email_screenshot.png)
 
 Written in Python 3.6 it relies on the following:
 * [ChromeDriver](http://chromedriver.chromium.org/)

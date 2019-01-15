@@ -6,6 +6,10 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ## [Unreleased]
 
+## [2019.1b2] - 2019-01-15
+## Fixed
+- Update branch name for documentation links
+
 ## [2019.1b1] - 2019-01-15
 ### Changed
 - Rewrite the project in Python 3
