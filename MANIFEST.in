@@ -1,0 +1,5 @@
+include README.md LICENSE traffic_info/templates/email.j2 traffic_info/templates/map.j2
+
+global-exclude *.py[co]
+
+prune docs/_build
