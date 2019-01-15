@@ -111,7 +111,7 @@ html_context = {
     "display_github": True,
     "github_user": "Da-Juan",
     "github_repo": "traffic_info",
-    "github_version": "chrome-headless",
+    "github_version": "master",
     "conf_py_path": "/docs/",
 }
 
