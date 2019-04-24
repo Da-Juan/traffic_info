@@ -35,11 +35,8 @@ def check_webdriver_path(webdriver: str = None) -> str:
     return webdriver
 
 
-def run() -> None:
-    """Run traffic info from command line."""
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-
+def parse_args() -> None:
+    """Parse command-line arguments."""
     parser = configargparse.ArgParser()
     parser.add_argument(
         "-c", "--config-file", is_config_file=True, help="Config file path."
@@ -73,7 +70,16 @@ def run() -> None:
     parser.add_argument(
         "-H", "--screenshot_height", type=int, help="Screenshot’s height."
     )
-    options = parser.parse_args()
+
+    return parser.parse_args()
+
+
+def run() -> None:
+    """Run traffic info from command line."""
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    options = parse_args()
 
     location_keys = ["latitude", "longitude", "zoom"]
     screenshot_keys = ["api_key", "webdriver_path", "width", "height"]
