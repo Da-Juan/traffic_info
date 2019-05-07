@@ -7,6 +7,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 ## [Unreleased]
 ### Changed
 - Better webdriver checking and error handling
+### Fixed
+- Fixed webdriver_path argument in README
 
 ## [2019.1b2] - 2019-01-15
 ### Fixed

@@ -58,7 +58,7 @@ traffic-info -l 43.6037834 -L 1.4402123 -f traffic-info@example.com -t user@exam
 #### Command line reference
 
 ```text
-usage: traffic-info [-h] [-c CONFIG_FILE] [-d WEBDRIVER] [-k API_KEY] -l
+usage: traffic-info [-h] [-c CONFIG_FILE] [-d WEBDRIVER_PATH] [-k API_KEY] -l
                     LATITUDE -L LONGITUDE [-z ZOOM] -f EMAIL_FROM -t EMAIL_TO
                     [-W SCREENSHOT_WIDTH] [-H SCREENSHOT_HEIGHT]
 
@@ -72,7 +72,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG_FILE, --config-file CONFIG_FILE
                         Config file path.
-  -d WEBDRIVER, --webdriver WEBDRIVER
+  -d WEBDRIVER_PATH, --webdriver_path WEBDRIVER_PATH
                         ChromeDriver's path.
   -k API_KEY, --api_key API_KEY
                         Google Maps Javascript API key.
