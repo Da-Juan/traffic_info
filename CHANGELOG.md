@@ -5,9 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ## [Unreleased]
+### Added
+- Use workalendar to avoid notifications on holidays
+### Changed
+- Better webdriver checking and error handling
+### Fixed
+- Fixed webdriver_path argument in README
 
 ## [2019.1b2] - 2019-01-15
-## Fixed
+### Fixed
 - Update branch name for documentation links
 
 ## [2019.1b1] - 2019-01-15

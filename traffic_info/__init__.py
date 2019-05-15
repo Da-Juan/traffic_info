@@ -1,4 +1,5 @@
 """traffic_info module."""
+import datetime
 import logging
 import os
 import sys
@@ -6,6 +7,8 @@ import sys
 import configargparse
 
 from selenium.common.exceptions import WebDriverException
+
+from workalendar.registry import registry
 
 from .__version__ import __version__
 from .core import Location, MapScreenshot, send_email
@@ -35,11 +38,8 @@ def check_webdriver_path(webdriver: str = None) -> str:
     return webdriver
 
 
-def run() -> None:
-    """Run traffic info from command line."""
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-
+def parse_args() -> configargparse.Namespace:
+    """Parse command-line arguments."""
     parser = configargparse.ArgParser()
     parser.add_argument(
         "-c", "--config-file", is_config_file=True, help="Config file path."
@@ -73,7 +73,31 @@ def run() -> None:
     parser.add_argument(
         "-H", "--screenshot_height", type=int, help="Screenshot’s height."
     )
-    options = parser.parse_args()
+    parser.add_argument(
+        "-C",
+        "--country_code",
+        type=str,
+        help="Country code(ISO 3166-1/ISO 3166-2) to avoid notifications on holidays.",
+    )
+
+    return parser.parse_args()
+
+
+def run() -> None:
+    """Run traffic info from command line."""
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    options = parse_args()
+    if options.country_code:
+        calendar_class = registry.get_calendar_class(options.country_code.upper())
+        if not calendar_class:
+            logger.error("Invalid country code")
+            sys.exit(1)
+        calendar = calendar_class()
+        if calendar.is_holiday(datetime.datetime.now()):
+            # Enjoy your holiday! :)
+            sys.exit()
 
     location_keys = ["latitude", "longitude", "zoom"]
     screenshot_keys = ["api_key", "webdriver_path", "width", "height"]

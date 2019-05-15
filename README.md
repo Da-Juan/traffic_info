@@ -11,6 +11,7 @@ Written in Python 3.6 it relies on the following:
 * [ConfigArgParse](https://github.com/bw2/ConfigArgParse)
 * [Jinja2](http://jinja.pocoo.org/) template engine
 * [Selenium](https://github.com/SeleniumHQ/Selenium) WebDriver
+* [Workalendar](https://pypi.org/project/workalendar/)
 * [Google Maps](https://maps.google.com)
 
 This project's source code is available on [Github](https://github.com/Da-Juan/traffic_info).
@@ -58,9 +59,10 @@ traffic-info -l 43.6037834 -L 1.4402123 -f traffic-info@example.com -t user@exam
 #### Command line reference
 
 ```text
-usage: traffic-info [-h] [-c CONFIG_FILE] [-d WEBDRIVER] [-k API_KEY] -l
+usage: traffic-info [-h] [-c CONFIG_FILE] [-d WEBDRIVER_PATH] [-k API_KEY] -l
                     LATITUDE -L LONGITUDE [-z ZOOM] -f EMAIL_FROM -t EMAIL_TO
                     [-W SCREENSHOT_WIDTH] [-H SCREENSHOT_HEIGHT]
+                    [-C COUNTRY_CODE]
 
 Args that start with '--' (eg. -d) can also be set in a config file (specified
 via -c). Config file syntax allows: key=value, flag=true, stuff=[a,b,c] (for
@@ -72,7 +74,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG_FILE, --config-file CONFIG_FILE
                         Config file path.
-  -d WEBDRIVER, --webdriver WEBDRIVER
+  -d WEBDRIVER_PATH, --webdriver_path WEBDRIVER_PATH
                         ChromeDriver's path.
   -k API_KEY, --api_key API_KEY
                         Google Maps Javascript API key.
@@ -89,4 +91,7 @@ optional arguments:
                         Screenshot’s width.
   -H SCREENSHOT_HEIGHT, --screenshot_height SCREENSHOT_HEIGHT
                         Screenshot’s height.
+  -C COUNTRY_CODE, --country_code COUNTRY_CODE
+                        Country code(ISO 3166-1/ISO 3166-2) to avoid
+                        notifications on holidays.
 ```
