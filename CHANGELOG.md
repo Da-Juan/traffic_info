@@ -6,8 +6,16 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ## [Unreleased]
 
+## [2019.1] - 2019-05-15
+### Added
+- Use workalendar to avoid notifications on holidays
+### Changed
+- Better webdriver checking and error handling
+### Fixed
+- Fixed webdriver_path argument in README
+
 ## [2019.1b2] - 2019-01-15
-## Fixed
+### Fixed
 - Update branch name for documentation links
 
 ## [2019.1b1] - 2019-01-15

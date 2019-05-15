@@ -4,3 +4,10 @@ email_from = traffic-info@example.com
 email_to = user@example.com
 api_key = YOUR_GOOGLE_MAPS_API_KEY
 webdriver_path = /path/to/webdriver
+
+# If you don't want to recieve notifications on holidays
+# uncomment the following line and setup your country code
+# according to ISO 3166-1/ISO 3166-2
+# see https://en.wikipedia.org/wiki/ISO_3166-1
+# and https://en.wikipedia.org/wiki/ISO_3166-2
+#country_code = FR

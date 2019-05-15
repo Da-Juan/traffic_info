@@ -26,7 +26,7 @@ AUTHOR = "Nicolas Rouanet"
 REQUIRES_PYTHON = ">=3.6.0"
 VERSION = None
 
-REQUIRED = ["configargparse", "jinja2", "selenium"]
+REQUIRED = ["configargparse", "jinja2", "selenium", "workalendar"]
 
 TESTS_REQUIRED = [
     "bandit",
