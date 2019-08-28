@@ -5,12 +5,11 @@ import shutil
 import smtplib
 import tempfile
 import time
-from email.headerregistry import Address
 from email.message import EmailMessage
 from email.utils import make_msgid
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
-from selenium import webdriver
+from selenium import webdriver  # type: ignore
 from selenium.webdriver.chrome.options import Options
 
 from .utils import render_template
@@ -34,9 +33,9 @@ class Location:  # pylint: disable-msg=R0903
 
     def __init__(self, latitude: float, longitude: float, zoom: int = 16) -> None:
         """Initialize a Location object with the given options."""
-        self.latitude: float = latitude
-        self.longitude: float = longitude
-        self.zoom: int = zoom
+        self.latitude = latitude
+        self.longitude = longitude
+        self.zoom = zoom
 
 
 class MapScreenshot:
@@ -53,24 +52,24 @@ class MapScreenshot:
 
     """
 
-    _template_dir: str = os.path.join(DIR, "templates")
+    _template_dir = os.path.join(DIR, "templates")
 
     def __init__(
         self,
         webdriver_path: str,
-        api_key: str = None,
+        api_key: Optional[str] = None,
         width: int = 1280,
         height: int = 720,
-        output_dir: str = None,
+        output_dir: Optional[str] = None,
     ) -> None:
         """Initialize a MapScreenshot object with the given options."""
-        self._tmpdir: str = tempfile.mkdtemp()
-        self.webdriver_path: str = webdriver_path
-        self.api_key: str = api_key
-        self.width: int = width
-        self.height: int = height
+        self._tmpdir = tempfile.mkdtemp()
+        self.webdriver_path = webdriver_path
+        self.api_key = api_key
+        self.width = width
+        self.height = height
         self.output_dir = output_dir if output_dir is not None else self._tmpdir
-        self.path: str = None
+        self.path = os.path.join(self.output_dir, "map.png")
 
     def take(self, location: Location) -> str:
         """
@@ -92,7 +91,7 @@ class MapScreenshot:
         map_html = os.path.join(self._tmpdir, "map.html")
         render_template(os.path.join(self._template_dir, "map.j2"), context, map_html)
 
-        options = Options()
+        options = Options()  # type: ignore
         options.set_headless(headless=True)
         driver = webdriver.Chrome(
             executable_path=self.webdriver_path, chrome_options=options
@@ -100,7 +99,6 @@ class MapScreenshot:
         driver.set_window_size(self.width, self.height)
         driver.get("file://%s" % map_html)
         time.sleep(5)
-        self.path = os.path.join(self.output_dir, "map.png")
         driver.save_screenshot(self.path)
         driver.quit()
         return self.path
@@ -116,7 +114,7 @@ def send_email(
     email_to: str,
     location: Location,
     screenshot: MapScreenshot,
-    template: str = None,
+    template: Optional[str] = None,
 ) -> None:
     """
     Send the traffic info email.
@@ -149,11 +147,12 @@ def send_email(
     html = render_template(template, context)
     email = EmailMessage()
     email["Subject"] = "Traffic info"
-    email["From"] = Address("Traffic info", addr_spec=email_from)
+    email["From"] = f"Traffic info <{email_from}>"
     email["To"] = email_to
     email.set_content(content)
     email.add_alternative(html, subtype="html")
     with open(screenshot.path, "rb") as img:
+        # type: ignore
         email.get_payload()[1].add_related(img.read(), "image", "png", cid=map_cid)
 
     try:

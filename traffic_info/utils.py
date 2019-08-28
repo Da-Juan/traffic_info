@@ -1,13 +1,13 @@
 """Utils for traffic_info package."""
 import shutil
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import jinja2
 
 Context = Dict[str, Any]
 
 
-def get_chromedriver_path() -> str:
+def get_chromedriver_path() -> Optional[str]:
     """
     Get ChromeDriver's binary path.
 
@@ -19,7 +19,9 @@ def get_chromedriver_path() -> str:
     return chromedriver_path
 
 
-def render_template(template: str, context: Context, output: str = None) -> str:
+def render_template(
+    template: str, context: Context, output: Optional[str] = None
+) -> str:
     """
     Render a Jinja2 template.
 
