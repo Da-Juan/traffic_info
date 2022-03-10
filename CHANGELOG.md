@@ -6,6 +6,15 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ## [Unreleased]
 
+## [2022.3] - 2022-03-10
+### Added
+- SMTP configuration options to allow external server usage
+- Support for SMTPS and SMTP authetication
+### Changed
+- Code updated to Python 3.10
+### Fixed
+- Fixed selenium and workalendar deprecated code
+
 ## [2019.1] - 2019-05-15
 ### Added
 - Use workalendar to avoid notifications on holidays
