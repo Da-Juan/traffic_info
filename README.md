@@ -23,7 +23,7 @@ This project's source code is available on [Github](https://github.com/Da-Juan/t
 ChromeDriver is used to take the screenshot so you need to install [Chromium](https://www.chromium.org/) or [Google Chrome](https://www.google.com/chrome/).
 Then, to install ChromeDriver you can use the provided script `bin/install_chromedriver.sh`.
 
-Next you'll need a SMTP server configured on the machine to send the email notifications.
+Next you'll need a SMTP server to send the email notifications.
 
 Optionally, you'll need a Google Maps Javascript API key if you have an intensive use of traffic-info.
 Refer to [Google Maps Platform documentation](https://developers.google.com/maps/documentation/javascript/get-api-key).
@@ -59,18 +59,11 @@ traffic-info -l 43.6037834 -L 1.4402123 -f traffic-info@example.com -t user@exam
 #### Command line reference
 
 ```text
-usage: traffic-info [-h] [-c CONFIG_FILE] [-d WEBDRIVER_PATH] [-k API_KEY] -l
-                    LATITUDE -L LONGITUDE [-z ZOOM] -f EMAIL_FROM -t EMAIL_TO
-                    [-W SCREENSHOT_WIDTH] [-H SCREENSHOT_HEIGHT]
-                    [-C COUNTRY_CODE]
+usage: traffic-info [-h] [-c CONFIG_FILE] [-d WEBDRIVER_PATH] [-k API_KEY] -l LATITUDE -L LONGITUDE [-z ZOOM] -f
+                    EMAIL_FROM -t EMAIL_TO [-s SMTP_SERVER] [-p SMTP_PORT] [-S] [-u SMTP_LOGIN] [-w SMTP_PASSWORD]
+                    [-W SCREENSHOT_WIDTH] [-H SCREENSHOT_HEIGHT] [-C COUNTRY_CODE]
 
-Args that start with '--' (eg. -d) can also be set in a config file (specified
-via -c). Config file syntax allows: key=value, flag=true, stuff=[a,b,c] (for
-details, see syntax at https://goo.gl/R74nmi). If an arg is specified in more
-than one place, then commandline values override config file values which
-override defaults.
-
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -c CONFIG_FILE, --config-file CONFIG_FILE
                         Config file path.
@@ -87,11 +80,19 @@ optional arguments:
                         Email sender’s address.
   -t EMAIL_TO, --email_to EMAIL_TO
                         Email recipient’s address.
+  -s SMTP_SERVER, --smtp_server SMTP_SERVER
+                        SMTP server’s address.
+  -p SMTP_PORT, --smtp_port SMTP_PORT
+                        SMTP server’s port.
+  -S, --smtp_use_ssl    Use SMTPS.
+  -u SMTP_LOGIN, --smtp_login SMTP_LOGIN
+                        SMTP server’s login.
+  -w SMTP_PASSWORD, --smtp_password SMTP_PASSWORD
+                        SMTP server’s password.
   -W SCREENSHOT_WIDTH, --screenshot_width SCREENSHOT_WIDTH
                         Screenshot’s width.
   -H SCREENSHOT_HEIGHT, --screenshot_height SCREENSHOT_HEIGHT
                         Screenshot’s height.
   -C COUNTRY_CODE, --country_code COUNTRY_CODE
-                        Country code(ISO 3166-1/ISO 3166-2) to avoid
-                        notifications on holidays.
+                        Country code(ISO 3166-1/ISO 3166-2) to avoid notifications on holidays.
 ```

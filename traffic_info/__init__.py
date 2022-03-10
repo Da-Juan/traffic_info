@@ -11,7 +11,7 @@ from selenium.common.exceptions import WebDriverException
 from workalendar.registry import registry
 
 from .__version__ import __version__
-from .core import Location, MapScreenshot, send_email
+from .core import Location, MapScreenshot, SMTPServer, send_email
 from .exceptions import NotExecutableError, WebdriverNotFoundError
 from .utils import get_chromedriver_path
 
@@ -66,6 +66,21 @@ def parse_args() -> configargparse.Namespace:
     )
     parser.add_argument(
         "-t", "--email_to", required=True, help="Email recipient’s address."
+    )
+    parser.add_argument(
+        "-s",
+        "--smtp_server",
+        type=str,
+        default="localhost",
+        help="SMTP server’s address.",
+    )
+    parser.add_argument(
+        "-p", "--smtp_port", type=int, default=25, help="SMTP server’s port."
+    )
+    parser.add_argument("-S", "--smtp_use_ssl", action="store_true", help="Use SMTPS.")
+    parser.add_argument("-u", "--smtp_login", type=str, help="SMTP server’s login.")
+    parser.add_argument(
+        "-w", "--smtp_password", type=str, help="SMTP server’s password."
     )
     parser.add_argument(
         "-W", "--screenshot_width", type=int, help="Screenshot’s width."
@@ -123,7 +138,20 @@ def run() -> None:
     except WebDriverException as exc:
         logger.error(exc.msg)
         sys.exit(1)
-    send_email(options.email_from, options.email_to, location, screenshot)
+    smtp_server = SMTPServer(
+        options.smtp_server,
+        options.smtp_port,
+        options.smtp_use_ssl,
+        options.smtp_login,
+        options.smtp_password,
+    )
+    send_email(
+        options.email_from,
+        options.email_to,
+        location,
+        screenshot,
+        smtp_server,
+    )
 
 
 __all__ = ["__version__", "Location", "MapScreenshot", "run", "send_email"]

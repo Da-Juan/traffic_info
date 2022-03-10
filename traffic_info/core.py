@@ -39,6 +39,44 @@ class Location:
     zoom: int
 
 
+class SMTPServer:
+    """SMTPServer class."""
+
+    def __init__(
+        self,
+        server: str = "localhost",
+        port: int = 25,
+        use_ssl: bool = False,
+        login: str = None,
+        password: str = None,
+    ) -> None:
+        """Initialize a SMTPServer object with the given options."""
+        self.server = server
+        self.port = port
+        self.use_ssl = use_ssl
+        self.login = login
+        self.password = password
+        self._smtp = None
+
+    def __del__(self) -> None:
+        """Cleanup stmp object."""
+        if self._smtp is not None:
+            self._smtp.quit()
+
+    def connect(self) -> None:
+        """Start SMTP connection."""
+        if self.use_ssl:
+            self._smtp = smtplib.SMTP_SSL(self.server, self.port)
+        else:
+            self._smtp = smtplib.SMTP(self.server, self.port)
+        if self.login is not None and self.password is not None:
+            self._smtp.login(self.login, self.password)
+
+    def send_message(self, email: EmailMessage) -> None:
+        """Send email message."""
+        self._smtp.send_message(email)
+
+
 class MapScreenshot:
     """
     MapScreenshot class.
@@ -116,6 +154,7 @@ def send_email(
     email_to: str,
     location: Location,
     screenshot: MapScreenshot,
+    smtp_server: SMTPServer,
     template: str = None,
 ) -> None:
     """
@@ -157,7 +196,11 @@ def send_email(
         email.get_payload()[1].add_related(img.read(), "image", "png", cid=map_cid)
 
     try:
-        with smtplib.SMTP("localhost") as smtp:
-            smtp.send_message(email)
-    except ConnectionRefusedError as exception:
+        smtp_server.connect()
+    except (ConnectionRefusedError, smtplib.SMTPAuthenticationError) as exception:
+        logger.error("Unable to connect to SMTP server(%s)", exception)
+
+    try:
+        smtp_server.send_message(email)
+    except smtplib.SMTPException as exception:
         logger.error("Unable to send email(%s)", exception)
