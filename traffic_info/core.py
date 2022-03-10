@@ -93,7 +93,7 @@ class MapScreenshot:
         render_template(os.path.join(self._template_dir, "map.j2"), context, map_html)
 
         options = Options()
-        options.set_headless(headless=True)
+        options.headless = True
         driver = webdriver.Chrome(
             executable_path=self.webdriver_path, chrome_options=options
         )
