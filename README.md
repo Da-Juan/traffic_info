@@ -35,7 +35,7 @@ Refer to [Google Maps Platform documentation](https://developers.google.com/maps
 Create a Python3 virtualenv then run `setup.py`:
 
 ```text
-python3 -m virtualenv -p python3 venv
+python3 -m venv venv
 source venv/bin/activate
 python3 setup.py install
 ```

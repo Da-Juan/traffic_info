@@ -23,7 +23,7 @@ DESCRIPTION = "Send traffic info screenshots by email."
 URL = "https://github.com/Da-Juan/traffic_info"
 EMAIL = "rouanet.n@gmail.com"
 AUTHOR = "Nicolas Rouanet"
-REQUIRES_PYTHON = ">=3.6.0"
+REQUIRES_PYTHON = ">=3.10.0"
 VERSION = None
 
 REQUIRED = ["configargparse", "jinja2", "selenium", "workalendar"]

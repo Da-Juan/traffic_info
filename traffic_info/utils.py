@@ -32,12 +32,12 @@ def render_template(template: str, context: Context, output: str = None) -> str:
         The rendered template if output is None or the path to the rendered file.
 
     """
-    with open(template, mode="r") as template_file:
+    with open(template, mode="r", encoding="utf-8") as template_file:
         jinja_template = jinja2.Template(template_file.read())
 
     render = jinja_template.render(context)
     if output is None:
         return render
-    with open(output, mode="w") as render_file:
+    with open(output, mode="w", encoding="utf-8") as render_file:
         render_file.write(render)
     return output

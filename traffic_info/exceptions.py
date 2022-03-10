@@ -16,7 +16,7 @@ class WebdriverNotFoundError(TrafficInfoError):
 
     def __init__(self, path):
         """Class init."""
-        super(WebdriverNotFoundError, self).__init__()
+        super().__init__()
         msg = "Webdriver not found"
         if path is not None:
             msg += f" ({path})"
@@ -34,5 +34,5 @@ class NotExecutableError(TrafficInfoError):
 
     def __init__(self, path):
         """Class init."""
-        super(NotExecutableError, self).__init__()
+        super().__init__()
         self.msg = f"The file {path} is not executable."

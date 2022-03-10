@@ -5,6 +5,7 @@ import shutil
 import smtplib
 import tempfile
 import time
+from dataclasses import dataclass
 from email.headerregistry import Address
 from email.message import EmailMessage
 from email.utils import make_msgid
@@ -16,12 +17,13 @@ from selenium.webdriver.chrome.options import Options
 from .utils import render_template
 
 DIR = os.path.dirname(os.path.abspath(__file__))
-CHROMEDRIVER_PATH = "%s/bin/chromedriver" % DIR
+CHROMEDRIVER_PATH = f"{DIR}/bin/chromedriver"
 
 Context = Dict[str, Any]
 
 
-class Location:  # pylint: disable-msg=R0903
+@dataclass
+class Location:
     """
     Location class.
 
@@ -32,11 +34,9 @@ class Location:  # pylint: disable-msg=R0903
 
     """
 
-    def __init__(self, latitude: float, longitude: float, zoom: int = 16) -> None:
-        """Initialize a Location object with the given options."""
-        self.latitude: float = latitude
-        self.longitude: float = longitude
-        self.zoom: int = zoom
+    latitude: float
+    longitude: float
+    zoom: int
 
 
 class MapScreenshot:
@@ -98,7 +98,7 @@ class MapScreenshot:
             executable_path=self.webdriver_path, chrome_options=options
         )
         driver.set_window_size(self.width, self.height)
-        driver.get("file://%s" % map_html)
+        driver.get(f"file://{map_html}")
         time.sleep(5)
         self.path = os.path.join(self.output_dir, "map.png")
         driver.save_screenshot(self.path)
