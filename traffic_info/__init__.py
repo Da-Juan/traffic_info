@@ -90,7 +90,7 @@ def run() -> None:
 
     options = parse_args()
     if options.country_code:
-        calendar_class = registry.get_calendar_class(options.country_code.upper())
+        calendar_class = registry.get(options.country_code.upper())
         if not calendar_class:
             logger.error("Invalid country code")
             sys.exit(1)
