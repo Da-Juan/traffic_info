@@ -1,0 +1,9 @@
+[Unit]
+Description=Traffic Info timer
+
+[Timer]
+OnCalendar=Mon-Fri *-*-* 16:45:00
+Persistent=true
+
+[Install]
+WantedBy=default.target

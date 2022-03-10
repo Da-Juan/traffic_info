@@ -96,3 +96,7 @@ options:
   -C COUNTRY_CODE, --country_code COUNTRY_CODE
                         Country code(ISO 3166-1/ISO 3166-2) to avoid notifications on holidays.
 ```
+
+#### Systemd units
+
+The `systemd` directory provides units examples if you want to run this tool on a schedule.

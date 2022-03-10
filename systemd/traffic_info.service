@@ -1,0 +1,6 @@
+[Unit]
+Description=Traffic Info
+
+[Service]
+ExecStart=%h/traffic_info/venv/bin/traffic-info -c %h/traffic_info/config
+Type=oneshot

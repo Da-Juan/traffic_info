@@ -10,6 +10,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 ### Added
 - SMTP configuration options to allow external server usage
 - Support for SMTPS and SMTP authetication
+- Systemd units examples
 ### Changed
 - Code updated to Python 3.10
 ### Fixed
